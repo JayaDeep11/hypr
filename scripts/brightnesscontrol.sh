@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-ScrDir=`dirname $(realpath $0)`
+ScrDir=`dirname "$(realpath "$0")"`
 source $ScrDir/globalcontrol.sh
 
 function print_error
@@ -28,15 +28,15 @@ function get_brightness {
 
 case $1 in
 i)  # increase the backlight by 5%
-    brightnessctl set +1%
+    brightnessctl set +5%
     send_notification ;;
 d)  # decrease the backlight by 5%
     if [[ $(get_brightness) -lt 5 ]] ; then
         # avoid 0% brightness
-        brightnessctl set 0%
+        brightnessctl set 1%
     else
         # decrease the backlight by 5%
-        brightnessctl set 11%-
+        brightnessctl set 5%-
     fi
     send_notification ;;
 *)  # print error
